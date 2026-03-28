@@ -1,0 +1,27 @@
+##############################################################################
+# BentoPDF — Coolify-ready Docker Compose
+#
+# All-in-one PDF toolkit
+# https://github.com/alam00000/BentoPDF
+#
+# No required environment variables — deploys with sensible defaults.
+#
+# ── Optional — sensible defaults provided ────────────────────────────────
+#   BENTOPDF_PORT        – Host port               (default: 8080)
+#   DISABLE_IPV6         – Disable IPv6             (default: false)
+##############################################################################
+
+services:
+  bentopdf:
+    image: ghcr.io/alam00000/bentopdf-simple:latest
+    restart: unless-stopped
+    ports:
+      - "${BENTOPDF_PORT:-8080}:8080"
+    environment:
+      - DISABLE_IPV6=${DISABLE_IPV6:-false}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        compress: "true"
